@@ -1,0 +1,21 @@
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Sr.No. </th>
+            <th>Name  </th>
+            <th>Email </th>
+            <th colspan="3">Action </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let i of UserData; let j=index">
+            <td>{{j+1}}</td>
+            <td>{{i.name}}</td>
+            <td>{{i.email}}</td>
+            <td colspan="3">
+                <button (click)="view()">View</button>
+                <button >Delete</button>
+            </td>
+        </tr>
+    </tbody>
+</table>
