@@ -1,13 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core'
 import { ApiService } from '../api.service';
 import { User } from '../model/interface/user';
-
 
 @Component({
   selector: 'app-all-user',
   templateUrl: './all-user.component.html',
   styleUrl: './all-user.component.css'
 })
+
 export class AllUserComponent implements OnInit {
   UserData :User[]=[];
   data ?: User;
@@ -24,7 +24,7 @@ export class AllUserComponent implements OnInit {
   }
 
   fetchAlluser(){
-    this.ApiService.getdetails().subscribe(response=>{
+    this.ApiService.getdetails().subscribe((response:any)=>{
       this.UserData= response.userData
     })
   }
@@ -34,18 +34,18 @@ export class AllUserComponent implements OnInit {
       next: (response: any)=>{
         this.data = response.userData
       },
-      error: (err)=>{
+      error: (err: any)=>{
         console.error(`Error fetching user with ID ${id}`,err)
       }
     })    
   }
   
   deleteUser(id: String){
-    this.ApiService.deleteUser(id).subscribe( (response) => {
+    this.ApiService.deleteUser(id).subscribe( (response:any) => {
       alert('User deleted successfully');
       this.fetchAlluser(); 
     },
-    (error) => {
+    (error:any) => {
       console.error('Error deleting user:', error);
       alert('Failed to delete user. Please try again.');
     })
