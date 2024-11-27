@@ -20,7 +20,8 @@ export class LoginComponent {
   login(){
     const user = {email: this.email,password: this.password}
     this.ApiService.login(user)
-    .subscribe((res: any) => {
+    .subscribe(
+      (res: any) => {
       const user = JSON.stringify(res);
       console.log(user)
       localStorage.setItem('userdata', user);

@@ -10,7 +10,11 @@ import { User } from '../model/interface/user';
 })
 export class AllUserComponent implements OnInit {
   UserData :User[]=[];
-  data ?:User;
+  data ?: User;
+
+  oldPassword = ""
+  newPassword = ""
+  confirmPassword = ""
 
   constructor(private ApiService:ApiService){
   }
@@ -28,7 +32,6 @@ export class AllUserComponent implements OnInit {
   view(id: String): void{
     this.ApiService.getdetailByID(id).subscribe({
       next: (response: any)=>{
-        console.log(this.data)
         this.data = response.userData
       },
       error: (err)=>{
@@ -46,5 +49,14 @@ export class AllUserComponent implements OnInit {
       console.error('Error deleting user:', error);
       alert('Failed to delete user. Please try again.');
     })
+  }
+
+  changePassword(){
+    const passwordDetails = {
+      oldPassword: this.oldPassword, 
+      newPassword: this.newPassword, 
+      confirmPassword: this.confirmPassword
+    }
+    this.ApiService.changePassword(passwordDetails).subscribe({})
   }
 }

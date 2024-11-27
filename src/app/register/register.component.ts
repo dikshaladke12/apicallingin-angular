@@ -13,6 +13,7 @@ export class RegisterComponent {
   password = "";
 
   returnUrl = '/'
+  
   constructor(private ApiService: ApiService, private router: Router) { }
 
   register() {
