@@ -89,7 +89,6 @@ export const deleteUserById= async(req,res)=>{
     }
 }
 
-
 export const updateUser = async(req,res)=>{
     try {
         const id = req.params.id;
@@ -121,5 +120,33 @@ export const updateUser = async(req,res)=>{
     } catch (error) {
         console.error(error.message);
         return res.status(500).json({message:"error while updateing information "})
+    }
+}
+
+export const changepassword= async(req,res)=>{
+    try {
+        const userdetails = req.decoded.id;
+        const {oldPassword, newPassword, confirmPassword } = req.body;
+        const details =await User.findOne({_id:userdetails})
+
+        const checkOldPassword = await bcrypt.compare(oldPassword, details.password)
+        if(!checkOldPassword){
+            return res.status(404).json({message:"old password not matched" })
+        }
+        if(newPassword !== confirmPassword){
+            return res.status(404).json({message: " confirmpassword and newpassword not matched"})
+        }
+        const hashedNewPassword = await bcrypt.hash(newPassword, details.password);
+        details.password= hashedNewPassword;
+        await details.save()
+       
+
+        return res.status(200).json({message: "password changed "})
+
+
+
+    } catch (error) {
+        console.error(error.message);
+        return res.status(500).json({message: " error while chnaging password "})
     }
 }
