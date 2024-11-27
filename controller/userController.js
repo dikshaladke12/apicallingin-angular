@@ -88,3 +88,38 @@ export const deleteUserById= async(req,res)=>{
         return res.status(500).json({message: "error while deleting user"})
     }
 }
+
+
+export const updateUser = async(req,res)=>{
+    try {
+        const id = req.params.id;
+        const {name , email, password} = req.body;
+        if( !name && !email && !password){
+            return res.status(404).json({message: "not provide the req body "})
+        }
+        const updateData ={};
+        if(name ){
+            updateData.name= name 
+        }
+        if(email){
+            updateData.email = email
+        }
+        if(password){
+            const hashPass = await bcrypt.hash(password, 10)
+            updateData.password = hashPass
+        }
+        const updateUser = await User.findByIdAndUpdate(
+            id,
+            updateData,
+            {new: true}
+        )
+        if(!updateUser){
+            return res.status(404).json({ message: "User not found" });
+        }
+
+        return res.status(200).json({message: "userdata updated", userData : updateUser})
+    } catch (error) {
+        console.error(error.message);
+        return res.status(500).json({message:"error while updateing information "})
+    }
+}
