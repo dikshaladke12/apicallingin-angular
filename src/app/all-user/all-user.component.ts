@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../api.service';
 import { User } from '../model/interface/user';
-import { response } from 'express';
+
+
 @Component({
   selector: 'app-all-user',
   templateUrl: './all-user.component.html',
@@ -9,20 +10,41 @@ import { response } from 'express';
 })
 export class AllUserComponent implements OnInit {
   UserData :User[]=[];
-  data :any;
-  id= '6745621d0e7ff9f51d0481e5';
+  data ?:User;
+
   constructor(private ApiService:ApiService){
   }
-  ngOnInit(){
+
+  ngOnInit(): void {
+    this.fetchAlluser()
+  }
+
+  fetchAlluser(){
     this.ApiService.getdetails().subscribe(response=>{
       this.UserData= response.userData
     })
   }
-  view(){
-    this.ApiService.getdetailByID(this.id).subscribe(response=>{
-      
-      this.data = response.userData
-      console.log(this.data)
+
+  view(id: String): void{
+    this.ApiService.getdetailByID(id).subscribe({
+      next: (response: any)=>{
+        console.log(this.data)
+        this.data = response.userData
+      },
+      error: (err)=>{
+        console.error(`Error fetching user with ID ${id}`,err)
+      }
+    })    
+  }
+  
+  deleteUser(id: String){
+    this.ApiService.deleteUser(id).subscribe( (response) => {
+      alert('User deleted successfully');
+      this.fetchAlluser(); 
+    },
+    (error) => {
+      console.error('Error deleting user:', error);
+      alert('Failed to delete user. Please try again.');
     })
   }
 }

@@ -8,15 +8,8 @@ import { observableToBeFn } from 'rxjs/internal/testing/TestScheduler';
 })
 export class ApiService {
   private baseUrl = "http://localhost:4000";
-  id: number | undefined ;
+  
   constructor(private http: HttpClient) { }
-
-  setcurrentId(){
-    this.id = this.id;
-  }
-  getCurrentId(){
-    return  this.id
-  }
   
   register(user: any): Observable<any>{
     return this.http.post(`${this.baseUrl}/register`, user)
@@ -30,8 +23,12 @@ export class ApiService {
     return this.http.get<any>(`${this.baseUrl}/details`)
   }
 
-  getdetailByID(id: any): Observable<any>{
+  getdetailByID(id: String): Observable<any>{
     return this.http.get<any>(`${this.baseUrl}/detail/${id}`)
+  }
+
+  deleteUser(id: String): Observable<any>{
+    return this.http.delete(`${this.baseUrl}/delete/${id}`)
   }
 }
  

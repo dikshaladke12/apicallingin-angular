@@ -1,17 +1,40 @@
-
-<h2>Registration form </h2>
-<form (ngSubmit)="register()">
-    <div>
-        <label>Name : </label>
-        <input type='text' [(ngModel)]="name" name="name" placeholder="enter your name">
-    </div>
-    <div>
-        <label>Email : </label>
-        <input type='email' [(ngModel)]="email" name="email" placeholder="enter your Email">
-    </div>
-    <div>
-        <label>password : </label>
-        <input type='text' [(ngModel)]="password" name="password" placeholder="enter your password">
-    </div>
-    <button type="submit">register</button>
-</form>
+<div class="registration-container">
+    <h2>Registration Form</h2>
+    <form (ngSubmit)="register()" class="registration-form">
+      <div class="form-group">
+        <label for="name">Name:</label>
+        <input
+          type="text"
+          id="name"
+          [(ngModel)]="name"
+          name="name"
+          placeholder="Enter your name"
+          required
+        />
+      </div>
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input
+          type="email"
+          id="email"
+          [(ngModel)]="email"
+          name="email"
+          placeholder="Enter your email"
+          required
+        />
+      </div>
+      <div class="form-group">
+        <label for="password">Password:</label>
+        <input
+          type="password"
+          id="password"
+          [(ngModel)]="password"
+          name="password"
+          placeholder="Enter your password"
+          required
+        />
+      </div>
+      <button type="submit" class="submit-btn">Register</button>
+    </form>
+  </div>
+  
