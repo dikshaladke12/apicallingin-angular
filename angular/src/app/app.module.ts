@@ -7,7 +7,7 @@ import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { FormsModule } from '@angular/forms';
-import {  provideHttpClient } from '@angular/common/http';
+import {  provideHttpClient, withFetch } from '@angular/common/http';
 import { AllUserComponent } from './all-user/all-user.component';
 
 @NgModule({
