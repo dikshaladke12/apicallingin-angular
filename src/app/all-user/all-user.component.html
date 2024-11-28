@@ -2,7 +2,7 @@
 
 <body>
     <div>
-        <span><button> Change password</button></span>
+        <span><button (click)="changePassword()"> Change password</button></span>
 
     </div>
     <table class="table table-bordered">
@@ -35,6 +35,7 @@
             <p><strong>ID:</strong> {{ data._id }}</p>
             <p><strong>Name:</strong> {{ data.name }}</p>
             <p><strong>Email:</strong> {{ data.email }}</p>
+            <button (click)="clearUser()">Close</button>
         </div>
     </div>
 

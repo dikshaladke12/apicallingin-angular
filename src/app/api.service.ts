@@ -23,11 +23,11 @@ export class ApiService {
     return this.http.get<any>(`${this.baseUrl}/details`)
   }
 
-  getdetailByID(id: String): Observable<any>{
+  getdetailByID(id: string): Observable<any>{
     return this.http.get<any>(`${this.baseUrl}/detail/${id}`)
   }
 
-  deleteUser(id: String): Observable<any>{
+  deleteUser(id: string): Observable<any>{
     return this.http.delete(`${this.baseUrl}/delete/${id}`)
   }
 
@@ -35,11 +35,8 @@ export class ApiService {
     return this.http.post(`${this.baseUrl}/changePassword`,credentials)
   }
   
-  // updateUser(id: String, updateUser: User ):void{
-
-  //   let index = this.userData.findIndex((res)=>res._id == id)
-  //   this.userData[index] = updateUser;
-  //   localStorage.setItem("userData",JSON.stringify(this.userData))
-  // }
+  updateUser(id: string, data: {name?:string, email?:string, password?:string}): Observable<any>{
+    return this.http.put(`${this.baseUrl}/update/${id}`,data)
+  }
 }
  
